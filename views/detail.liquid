@@ -1,6 +1,38 @@
 {% render 'partials/head.liquid' %}
 
-<a href="/instrumenten/{{ instrument.key }}/uitlenen" >uitlenen</a>
+<main class="instrument-detail">
+    <header>
+        <a href="/instrumenten">← Overzicht</a>
+        <h1>{{ instrument.name }}</h1>
+        <p>{{ instrument.instrument }}</p>
+    </header>
 
+    <figure>
+        {% comment %} <img src="https://fdnd.directus.app/assets/{{ instrument.photo }}" alt="{{ instrument.name }}"> {% endcomment %}
+        <img src="/assets/DSC_0473.jpg" alt="{{ instrument.name }}">
+        <span class="status">{{ instrument.status }}</span>
+    </figure>
+
+    <section>
+        <article>
+            {% if instrument.brand %}<p><strong>Merk:</strong> {{ instrument.brand }}</p>{% endif %}
+            {% if instrument.serial_number %}<p><strong>Serie nummer:</strong> {{ instrument.serial_number }}</p>{% endif %}
+            {% if instrument.storage %}<p><strong>Berplaats:</strong> {{ instrument.storage }}</p>{% endif %}
+            <p><strong>Merk:</strong> {{ instrument.brand }}</p>
+            <p><strong>Serie nummer:</strong> {{ instrument.serial_number }}</p>
+            <p><strong>Berplaats:</strong> Instrumentenhok tweede verdieping</p>
+        </article>
+
+        <nav>
+            <a href="/instrumenten/{{ instrument.key }}/uitlenen" class="btn primary">Uitlenen</a>
+            <a href="/instrumenten/{{ instrument.key }}/innemen" class="btn secondary">Innemen</a>
+            
+            <div class="admin">
+                <a href="/instrumenten/{{ instrument.key }}/aanpassen" class="btn outline">Aanpassen</a>
+                <a href="/instrumenten/{{ instrument.key }}/schade" class="btn outline danger">Schade</a>
+            </div>
+        </nav>
+    </section>
+</main>
 
 {% render 'partials/foot.liquid' %}
