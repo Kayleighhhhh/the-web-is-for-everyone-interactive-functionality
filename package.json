@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/fdnd-task/the-web-is-for-everyone-interactive-functionality#readme",
   "dependencies": {
-    "express": "latst",
+    "express": "latest",
     "liquidjs": "latest",
     "nodemon": "^3.1.14"
   }
