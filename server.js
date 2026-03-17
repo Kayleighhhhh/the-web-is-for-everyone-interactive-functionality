@@ -86,7 +86,7 @@ app.post('/instrumenten/nieuw', async function (request, response) {
   //als het wachtwoord fout is stuur dit terug
   } else {
     //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! gat terug naar <a href="/instrumenten/nieuw">en probeer het opnieuw</a>')
+    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/nieuw">en probeer het opnieuw</a>')
   }
 })
 
@@ -128,7 +128,7 @@ app.post('/instrumenten/:key/aanpassen', async function (request, response) {
   //als het wachtwoord fout is stuur dit terug
   } else {
     //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! gat terug naar <a href="/instrumenten/uitlenen">en probeer het opnieuw</a>')
+    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/uitlenen">en probeer het opnieuw</a>')
     //response.render('fout.liquid')
   }
 })
@@ -142,6 +142,7 @@ app.get('/instrumenten/:key/uitlenen', async function (request, response) {
 
   //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('login.liquid', {
+    instrument: apiResponseJSON.data,
     instrument: instrumentResponseJSON.data[0]
   })
 })
@@ -152,13 +153,20 @@ app.post('/instrumenten/:key/uitlenen', async function (request, response) {
   //check met een if statement of het wachtwoord klopt
   if (request.body.password === process.env.UITLEEN_INSTRUMENT) {
 
+    //haal link op om de key te gebruiken in url en zet om naar json
+    const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
+    const instrumentResponseJSON = await instrumentResponse.json()
+
     //laat de juiste pagina zien
-    response.render('uitlenen.liquid')
+    response.render('uitlenen.liquid', {
+    instrument: apiResponseJSON.data,
+    instrument: instrumentResponseJSON.data[0]
+  })
 
   //als het wachtwoord fout is stuur dit terug
   } else {
     //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! gat terug naar <a href="/instrumenten/uitlenen">en probeer het opnieuw</a>')
+    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/uitlenen">en probeer het opnieuw</a>')
   }
 })
 
@@ -187,7 +195,7 @@ app.post('/instrumenten/:key/innemen', async function (request, response) {
   //als het wachtwoord fout is stuur dit terug
   } else {
     //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! gat terug naar <a href="/instrumenten/innemen">en probeer het opnieuw</a>')
+    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/innemen">en probeer het opnieuw</a>')
   }
 })
 
@@ -216,7 +224,7 @@ app.post('/instrumenten/:key/schade', async function (request, response) {
   //als het wachtwoord fout is stuur dit terug
   } else {
     //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! gat terug naar <a href="/instrumenten/schade">en probeer het opnieuw</a>')
+    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/schade">en probeer het opnieuw</a>')
   }
 })
 
