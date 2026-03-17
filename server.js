@@ -166,7 +166,7 @@ app.post('/instrumenten/:key/uitlenen', async function (request, response) {
   //als het wachtwoord fout is stuur dit terug
   } else {
     //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/uitlenen">en probeer het opnieuw</a>')
+    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/' + request.params.key + '/uitlenen">en probeer het opnieuw</a>')
   }
 })
 
