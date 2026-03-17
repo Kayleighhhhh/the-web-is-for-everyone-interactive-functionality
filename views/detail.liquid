@@ -4,12 +4,12 @@
     <header>
         <a href="/instrumenten">← Overzicht</a>
         <h1>{{ instrument.name }}</h1>
-        <p>{{ instrument.instrument }}</p>
+        <h2>{{ instrument.instrument }}</h2>
     </header>
 
     <figure>
         {% comment %} <img src="https://fdnd.directus.app/assets/{{ instrument.photo }}" alt="{{ instrument.name }}"> {% endcomment %}
-        <img src="/assets/DSC_0473.jpg" alt="{{ instrument.name }}">
+        <img src="assets/DSC_0473.jpg" alt="{{ instrument.name }}">
         <span class="status">{{ instrument.status }}</span>
     </figure>
 
