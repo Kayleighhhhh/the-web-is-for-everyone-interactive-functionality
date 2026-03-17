@@ -1,0 +1,9 @@
+{% render 'partials/head.liquid' %}
+
+<form action="/instrumenten/{{ instrument.key }}/schade" method="POST">
+  <label for="pw">Voer wachtwoord in:</label>
+  <input type="password" name="password" id="pw">
+  <button type="submit">Log in</button>
+</form>
+
+{% render 'partials/foot.liquid' %}
