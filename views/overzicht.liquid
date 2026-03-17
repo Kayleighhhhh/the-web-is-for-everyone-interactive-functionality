@@ -1,0 +1,108 @@
+{% render 'partials/head.liquid' %}
+
+<section class="ins-container">
+  <nav class="ins-controls">
+    <form action="/instrumenten" method="GET" class="filter-form">
+      <details class="ins-btn filters">
+        <summary>Filter</summary>
+
+        <label>
+          Instrument
+          <select name="instrument" onchange="this.form.submit()">
+            <option
+              value=""
+              {% if not soort %}
+                selected
+              {% endif %}
+            >
+              Alle instrumenten
+            </option>
+            <option
+              value="Gitaar akoestisch"
+              {% if soort == 'Gitaar akoestisch' %}
+                selected
+              {% endif %}
+            >
+              Gitaar
+            </option>
+            <option
+              value="Gitaar driekwart"
+              {% if soort == 'Gitaar driekwart' %}
+                selected
+              {% endif %}
+            >
+              Gitaar 3/4
+            </option>
+            <option
+              value="Basgitaar"
+              {% if soort == 'Basgitaar' %}
+                selected
+              {% endif %}
+            >
+              Basgitaar
+            </option>
+            <option
+              value="Elektrische gitaar"
+              {% if soort == 'Elektrische gitaar' %}
+                selected
+              {% endif %}
+            >
+              Elektrische gitaar
+            </option>
+            <option
+              value="Cello"
+              {% if soort == 'Cello' %}
+                selected
+              {% endif %}
+            >
+              Cello
+            </option>
+            <option
+              value="Viool"
+              {% if soort == 'Viool' %}
+                selected
+              {% endif %}
+            >
+              Viool
+            </option>
+          </select>
+        </label>
+      </details>
+    </form>
+
+    <button class="ins-btn">Sorteer</button>
+
+    <button class="ins-btn">Nieuw instrument</button>
+
+    <label class="ins-switch">
+      <input type="checkbox" checked>
+      <span class="ins-slider"></span>
+    </label>
+  </nav>
+
+  <table class="ins-list">
+    <thead class="ins-list-head">
+      <tr>
+        <th><h2 class="ins-title">Instrumenten</h2></th>
+        <th><h2 class="ins-title">Status</h2></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for instrument in instrumenten %}
+        <tr class="ins-row">
+          <td>
+            <a href="/instrumenten/{{ instrument.key }}" class="ins-link">
+              <h3 class="ins-name">{{ instrument.name }}</h3>
+            </a>
+          </td>
+
+          <td class="ins-status">
+            <a href="/instrumenten/{{ instrument.key }}" class="ins-link"><p>{{ instrument.status }}</p></a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+{% render 'partials/foot.liquid' %}

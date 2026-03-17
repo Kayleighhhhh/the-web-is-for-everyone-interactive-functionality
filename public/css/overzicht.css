@@ -1,0 +1,96 @@
+.ins-container {
+    max-width: 60rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+
+    .ins-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        align-items: center;
+
+        @media (min-width: 48rem) {
+            .ins-switch {
+                margin-left: auto;
+            }
+        }
+    }
+
+    .ins-btn {
+        background: var(--main);
+        color: var(--darktext);
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 2rem;
+        font-family: inherit;
+        cursor: pointer;
+    }
+
+    .ins-switch {
+        position: relative;
+        width: 3.5rem;
+        height: 1.8rem;
+        flex-shrink: 0; /* Voorkom vervorming */
+
+        input { opacity: 0; width: 0; height: 0; }
+        
+        .ins-slider {
+            position: absolute;
+            inset: 0;
+            background: var(--tabelfirstcolor);
+            border-radius: 2rem;
+            cursor: pointer;
+
+            &:before {
+                position: absolute;
+                content: "";
+                height: 1.2rem;
+                width: 1.2rem;
+                left: 0.3rem;
+                top: 0.3rem;
+                background: var(--secondair);
+                border-radius: 50%;
+                transition: 0.3s;
+            }
+        }
+
+        input:checked + .ins-slider:before {
+            transform: translateX(1.7rem);
+        }
+    }
+
+    .ins-list {
+        list-style: none;
+        padding: 0;
+        background: var(--tabelfirstcolor);
+        border: 1px solid var(--secondair);
+        border-radius: 2rem;
+        overflow: hidden;
+        width: 100%;
+
+        .ins-title {
+            justify-self: left;
+            padding: .5em 1.3em;
+
+        }
+
+        .ins-row {
+            border-bottom: 1px solid var(--secondair);
+            &:nth-child(odd) { background: var(--tabelsecondcolor); }
+            &:last-child { border-bottom: none; }
+        }
+
+        .ins-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: var(--darktext);
+
+            .ins-name { margin: 0; font-size: 1.1rem; }
+            .ins-status { margin: 0; font-size: 0.9rem; }
+        }
+    }
+}
