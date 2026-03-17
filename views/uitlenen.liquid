@@ -1,7 +1,22 @@
 {% render 'partials/head.liquid' %}
 
-<button>uitlenen</button>
+<main class="uit-pg">
+    <header class="uit-head">
+        <a href="/instrumenten/{{ instrument.key }}" class="back">← Terug</a>
+        <h1>Uitlenen</h1>
+        <h2>{{ instrument.name }}</h2>
+    </header>
 
-{{ instrument.status }}
+    <form class="uit-form" action="/instrumenten/{{ instrument.key }}/uitlenen" method="POST">
+        {% comment %} <img src="https://jouw-api-url.com/assets/{{ instrument.photo }}" alt="" class="uit-img"> {% endcomment %}
+        <img src="/assets/DSC_0473.jpg" alt="" class="uit-img">
+
+        <div class="veld"><p>Wie leent het?</p></label>
+            <input type="text" id="lener" name="lener" placeholder="Volledige naam" required>
+        </div>
+
+        <button type="submit" class="btn-uit">Bevestig uitlening</button>
+    </form>
+</main>
 
 {% render 'partials/foot.liquid' %}
