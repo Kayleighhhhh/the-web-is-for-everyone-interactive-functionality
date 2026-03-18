@@ -113,6 +113,11 @@ app.get('/instrumenten/:key/uitlenen', async function (request, response) {
   })
 })
 
+app.post('/instrumenten/:key/uitlenen', async function (request, response) {
+  
+
+})  
+
 
 //maak een route aan voor de inneem pagina
 app.get('/instrumenten/:key/innemen', async function (request, response) {
