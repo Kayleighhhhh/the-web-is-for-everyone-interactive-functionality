@@ -30,9 +30,11 @@
         margin: 0;
 
         img {
-            width: 100%;
+            width: auto;
             border-radius: 12px;
             display: block;
+            height: 15em;
+            justify-self: center;
         }
 
         .status {

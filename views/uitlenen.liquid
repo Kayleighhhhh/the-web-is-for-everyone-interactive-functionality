@@ -8,7 +8,7 @@
     </header>
 
     <form class="uit-form" action="/instrumenten/{{ instrument.key }}/uitlenen" method="POST">
-        <img src="https://fdnd-agency.directus.app/assets/{{ instrument.photo }}" alt="{{ instrument.name }}">
+        <img class="uit-img" src="https://fdnd-agency.directus.app/assets/{{ instrument.photo }}" alt="{{ instrument.name }}">
         {% comment %} <img src="assets/DSC_0473.jpg" alt="" class="uit-img"> {% endcomment %}
 
         <div class="veld"><p>Wie leent het?</p></label>
