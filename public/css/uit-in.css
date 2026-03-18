@@ -15,11 +15,12 @@
         gap: 1.5rem;
 
         .uit-img { 
-            width: auto;
+            width: 100%;
             border-radius: 12px;
             display: block;
-            height: 15em;
+            height: 20em;
             justify-self: center;
+            object-fit: cover;
         }
 
         .veld {
