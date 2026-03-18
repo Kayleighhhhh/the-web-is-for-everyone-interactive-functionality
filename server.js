@@ -66,28 +66,10 @@ app.get('/instrumenten', async function (request, response) {
   })
 })
 
-//maak de route om een nieuw instrument toe te voegen met wachtwoord beveiliging
+
 app.get('/instrumenten/nieuw', async function (request, response) {
-  //stuur eerst door naar login.liquid
-  response.render('logins/nieuwlogin.liquid')
-})
-
-//maak een post route om het wachtwoord te controleren
-app.post('/instrumenten/nieuw', async function (request, response) {
-
-  //check met een if statement of het wachtwoord klopt
-  if (request.body.password === process.env.NIEUW_INSTRUMENT) {
-
-    //zet hier later de data om echt een nieuw instrument te posten naar de datatbase en niet vergeten kayleigh
-
-    //laat de juiste pagina zien
-    response.render('nieuw.liquid')
-
-  //als het wachtwoord fout is stuur dit terug
-  } else {
-    //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/nieuw">en probeer het opnieuw</a>')
-  }
+  
+  response.render('nieuw.liquid')
 })
 
 //maak een route aan voor de detail pagina
@@ -111,33 +93,11 @@ app.get('/instrumenten/:key/aanpassen', async function (request, response) {
   const instrumentResponseJSON = await instrumentResponse.json()
 
   //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
-  response.render('logins/aanpassenlogin.liquid', {
+  response.render('aanpassen.liquid', {
     instrument: instrumentResponseJSON.data[0]
   })
 })
 
-//maak een post route om het wachtwoord te controleren
-app.post('/instrumenten/:key/aanpassen', async function (request, response) {
-   
-  //check met een if statement of het wachtwoord klopt
-  if (request.body.password === process.env.EDIT_INSTRUMENT) {
-
-    //haal link op om de key te gebruiken in url en zet om naar json
-    const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
-    const instrumentResponseJSON = await instrumentResponse.json()
-
-    //laat de juiste pagina zien
-    response.render('aanpassen.liquid', {
-    instrument: instrumentResponseJSON.data[0]
-  })
-
-  //als het wachtwoord fout is stuur dit terug
-  } else {
-    //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/aanpassen">en probeer het opnieuw</a>')
-    //response.render('fout.liquid')
-  }
-})
 
 //maak een route aan voor de uitleen pagina
 app.get('/instrumenten/:key/uitlenen', async function (request, response) {
@@ -147,34 +107,12 @@ app.get('/instrumenten/:key/uitlenen', async function (request, response) {
   const instrumentResponseJSON = await instrumentResponse.json()
 
   //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
-  response.render('logins/uitleenlogin.liquid', {
+  response.render('uitlenen.liquid', {
     instrument: apiResponseJSON.data,
     instrument: instrumentResponseJSON.data[0]
   })
 })
 
-//maak een post route om het wachtwoord te controleren
-app.post('/instrumenten/:key/uitlenen', async function (request, response) {
-   
-  //check met een if statement of het wachtwoord klopt
-  if (request.body.password === process.env.UITLEEN_INSTRUMENT) {
-
-    //haal link op om de key te gebruiken in url en zet om naar json
-    const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
-    const instrumentResponseJSON = await instrumentResponse.json()
-
-    //laat de juiste pagina zien
-    response.render('uitlenen.liquid', {
-    instrument: apiResponseJSON.data,
-    instrument: instrumentResponseJSON.data[0]
-  })
-
-  //als het wachtwoord fout is stuur dit terug
-  } else {
-    //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/' + request.params.key + '/uitlenen">en probeer het opnieuw</a>')
-  }
-})
 
 //maak een route aan voor de inneem pagina
 app.get('/instrumenten/:key/innemen', async function (request, response) {
@@ -184,31 +122,9 @@ app.get('/instrumenten/:key/innemen', async function (request, response) {
   const instrumentResponseJSON = await instrumentResponse.json()
 
   //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
-  response.render('logins/inneemlogin.liquid', {
+  response.render('innemen.liquid', {
     instrument: instrumentResponseJSON.data[0]
   })
-})
-
-//maak een post route om het wachtwoord te controleren
-app.post('/instrumenten/:key/innemen', async function (request, response) {
-   
-  //check met een if statement of het wachtwoord klopt
-  if (request.body.password === process.env.INNEEM_INSTRUMENT) {
-
-    //haal link op om de key te gebruiken in url en zet om naar json
-    const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
-    const instrumentResponseJSON = await instrumentResponse.json()
-
-    //laat de juiste pagina zien
-    response.render('innemen.liquid', {
-    instrument: instrumentResponseJSON.data[0]
-  })
-
-  //als het wachtwoord fout is stuur dit terug
-  } else {
-    //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/innemen">en probeer het opnieuw</a>')
-  }
 })
 
 //maak een route aan voor de schade pagina
@@ -219,32 +135,11 @@ app.get('/instrumenten/:key/schade', async function (request, response) {
   const instrumentResponseJSON = await instrumentResponse.json()
 
   //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
-  response.render('logins/schadelogin.liquid', {
+  response.render('schade.liquid', {
     instrument: instrumentResponseJSON.data[0]
   })
 })
 
-//maak een post route om het wachtwoord te controleren
-app.post('/instrumenten/:key/schade', async function (request, response) {
-   
-  //check met een if statement of het wachtwoord klopt
-  if (request.body.password === process.env.SCHADE_INSTRUMENT) {
-
-    //haal link op om de key te gebruiken in url en zet om naar json
-    const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
-    const instrumentResponseJSON = await instrumentResponse.json()
-
-    //laat de juiste pagina zien
-    response.render('schade.liquid', {
-    instrument: instrumentResponseJSON.data[0]
-  })
-
-  //als het wachtwoord fout is stuur dit terug
-  } else {
-    //stuur wat terug als het fout is VERANDER DIT NAAR EEN NIEUWE PAGINA MET STYLING!! LATER
-    response.send('fout wachtwoord!! ga terug naar <a href="/instrumenten/schade">en probeer het opnieuw</a>')
-  }
-})
 
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
