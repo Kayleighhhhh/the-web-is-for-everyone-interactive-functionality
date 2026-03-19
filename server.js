@@ -24,10 +24,10 @@ app.engine('liquid', engine.express())
 app.set('views', './views')
 
 // Doe een fetch naar de data die je nodig hebt
-const apiResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/')
+// const apiResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments?limit=500')
 
-// Lees van de response van die fetch het JSON object in, waar we iets mee kunnen doen
-const apiResponseJSON = await apiResponse.json()
+// // Lees van de response van die fetch het JSON object in, waar we iets mee kunnen doen
+// const apiResponseJSON = await apiResponse.json()
 
 
 console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
@@ -60,7 +60,7 @@ app.get('/instrumenten', async function (request, response) {
 
   //render overzicht.liquid en geef de data van de api en de gefilterde link mee
   response.render('overzicht.liquid', {
-    instrumenten: apiResponseJSON.data,
+    // instrumenten: apiResponseJSON.data,
     instrumenten: instrumentsResponseJSON.data,
     soort: soort
   })
@@ -108,14 +108,28 @@ app.get('/instrumenten/:key/uitlenen', async function (request, response) {
 
   //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('uitlenen.liquid', {
-    instrument: apiResponseJSON.data,
+    // instrument: apiResponseJSON.data,
     instrument: instrumentResponseJSON.data[0]
   })
 })
 
 app.post('/instrumenten/:key/uitlenen', async function (request, response) {
-  
+   const fetchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_log", {
+    method: "POST",
+    body: JSON.stringify({
+      note: request.body.studentName,
+      instrument: request.body.id
+    }),
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+  console.log(fetchResponse)
 
+const fetchResponseJSON = await fetchResponse.json()
+console.log(fetchResponseJSON)
+
+response.redirect(303, "/instrumenten/:key")
 })  
 
 
