@@ -63,7 +63,6 @@ app.get('/instrumenten', async function (request, response) {
 
   //render overzicht.liquid en geef de data van de api en de gefilterde link mee
   response.render('overzicht.liquid', {
-    // instrumenten: apiResponseJSON.data,
     instrumenten: instrumentsResponseJSON.data,
     soort: soort
   })
@@ -111,7 +110,6 @@ app.get('/instrumenten/:key/uitlenen', async function (request, response) {
 
   //render uitlenen.liquid  en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('uitlenen.liquid', {
-    // instrument: apiResponseJSON.data,
     instrument: instrumentResponseJSON.data[0]
   })
 })
