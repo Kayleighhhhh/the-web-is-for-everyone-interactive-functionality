@@ -10,7 +10,7 @@
     <figure>
         <img src="https://fdnd-agency.directus.app/assets/{{ instrument.photo }}" alt="{{ instrument.name }}">
         {% comment %} <img src="/assets/DSC_0473.jpg" alt="{{ instrument.name }}"> {% endcomment %}
-        <span class="status">{{ instrument.status }}</span>
+        <span class="status">{{ instrument.status | default:"Onbekend"}}</span>
     </figure>
 
     <section>
