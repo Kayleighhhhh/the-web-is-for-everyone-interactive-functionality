@@ -9,7 +9,7 @@ import { Liquid } from 'liquidjs';
 const app = express()
 
 // Maak werken met data uit formulieren iets prettiger
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 // Gebruik de map 'public' voor statische bestanden (resources zoals CSS, JavaScript, afbeeldingen en fonts)
 // Bestanden in deze map kunnen dus door de browser gebruikt worden
@@ -42,19 +42,22 @@ app.get('/', async function (request, response) {
 //maak een get route voor het overzicht van alle instrumenten
 app.get('/instrumenten', async function (request, response) {
 
+  
+
+  //maak de variable Params aan om het filter in te bewaren
+   const params = new URLSearchParams()
+
   // maar de variable soort aan om te filteren op het soort instrument
   const soort = request.query.instrument
 
-  //maak de variable instrumentParams aan om het filter in te bewaren
-  const instrumentParams = {}
-
   //maak een if statement om te checken of het soort instrument gefilterd wordt
   if (soort) {
-    instrumentParams['filter[instrument][_eq]'] = soort
+    params.set('filter[instrument][_eq]', soort)
   }
 
+  console.log(params.toString())
   //haal de link op om het filter achter te plakken
-  const instrumentsResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?' + new URLSearchParams(instrumentParams))
+  const instrumentsResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?' + params.toString())
   //zet de data om naar json
   const instrumentsResponseJSON = await instrumentsResponse.json()
 
@@ -68,7 +71,7 @@ app.get('/instrumenten', async function (request, response) {
 
 
 app.get('/instrumenten/nieuw', async function (request, response) {
-  
+
   response.render('nieuw.liquid')
 })
 
@@ -92,7 +95,7 @@ app.get('/instrumenten/:key/aanpassen', async function (request, response) {
   const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
   const instrumentResponseJSON = await instrumentResponse.json()
 
-  //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
+  //render aanpassen.liquid  en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('aanpassen.liquid', {
     instrument: instrumentResponseJSON.data[0]
   })
@@ -106,7 +109,7 @@ app.get('/instrumenten/:key/uitlenen', async function (request, response) {
   const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
   const instrumentResponseJSON = await instrumentResponse.json()
 
-  //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
+  //render uitlenen.liquid  en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('uitlenen.liquid', {
     // instrument: apiResponseJSON.data,
     instrument: instrumentResponseJSON.data[0]
@@ -114,23 +117,35 @@ app.get('/instrumenten/:key/uitlenen', async function (request, response) {
 })
 
 app.post('/instrumenten/:key/uitlenen', async function (request, response) {
-   const fetchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_log", {
+  const fetchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_log", {
     method: "POST",
     body: JSON.stringify({
-      note: "uitgeleend aan " + request.body.studentName,
-      instrument: request.body.id
+      note: request.body.key + " is uitgeleend aan " + request.body.studentName,
+      instrument: request.body.id 
     }),
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
     }
   })
+  const patchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_instruments/" + request.body.id, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify({
+      status: "Onbeschikbaar"
+    })
+  })
+
   console.log(fetchResponse)
 
-const fetchResponseJSON = await fetchResponse.json()
-console.log(fetchResponseJSON)
+  const fetchResponseJSON = await fetchResponse.json()
+  console.log(fetchResponseJSON)
+  const patchResponseJSON = await patchResponse.json()
+  console.log(patchResponseJSON)
 
-response.redirect(303, "/instrumenten/:key")
-})  
+  response.redirect(303, "/instrumenten/" + request.params.key)
+})
 
 
 //maak een route aan voor de inneem pagina
@@ -140,10 +155,40 @@ app.get('/instrumenten/:key/innemen', async function (request, response) {
   const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
   const instrumentResponseJSON = await instrumentResponse.json()
 
-  //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
+  //render innemen.liquid en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('innemen.liquid', {
     instrument: instrumentResponseJSON.data[0]
   })
+})
+
+app.post('/instrumenten/:key/innemen', async function (request, response) {
+
+  const logResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_log", {
+    method: "POST",
+    headers: { 
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify({
+      note: "Inname " +request.body.key + " staat: " + request.body.staat + ". Opmerking: " + request.body.opm,
+      instrument: request.body.id 
+    })
+  })
+
+  const patchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_instruments/" + request.body.id, {
+    method: "PATCH",
+    headers: { 
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify({
+      status: "Beschikbaar"
+    })
+  })
+
+  // log de resultaten in je terminal voor controle
+  console.log('Inname gelukt voor ID:', request.body.id)
+
+  // Ga terug naar de detailpagina
+  response.redirect(303, "/instrumenten/" + request.params.key)
 })
 
 //maak een route aan voor de schade pagina
@@ -153,7 +198,7 @@ app.get('/instrumenten/:key/schade', async function (request, response) {
   const instrumentResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?filter[key]=' + request.params.key)
   const instrumentResponseJSON = await instrumentResponse.json()
 
-  //render login.liquid om het wachtwoord in te vullen en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
+  //render schade.liquid en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('schade.liquid', {
     instrument: instrumentResponseJSON.data[0]
   })
