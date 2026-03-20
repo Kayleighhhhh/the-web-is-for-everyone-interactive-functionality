@@ -117,7 +117,7 @@ app.post('/instrumenten/:key/uitlenen', async function (request, response) {
    const fetchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_log", {
     method: "POST",
     body: JSON.stringify({
-      note: request.body.studentName,
+      note: "uitgeleend aan " + request.body.studentName,
       instrument: request.body.id
     }),
     headers: {
