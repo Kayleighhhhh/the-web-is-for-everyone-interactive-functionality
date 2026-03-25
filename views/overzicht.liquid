@@ -5,9 +5,9 @@
   <nav class="ins-controls">
     <form action="/instrumenten" method="GET" class="filter-form">
 
-        <label class="ins-btn filters">
-          Instrument
-          <select name="instrument" onchange="this.form.submit()">
+        <label class="filters">
+          {% comment %} Instrument {% endcomment %}
+          <select name="instrument" onchange="this.form.submit()" class="ins-btn">
             <option
               value=""
               {% if not soort %}

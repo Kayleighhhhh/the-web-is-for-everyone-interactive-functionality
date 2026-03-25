@@ -23,8 +23,36 @@
         border: none;
         padding: 0.5rem 1.5rem;
         border-radius: 2rem;
-        font-family: inherit;
+        font-family: akkurat;
         cursor: pointer;
+        font-size: medium;
+    }
+
+    select,::picker(select) {
+        appearance: base-select;
+        border:unset;
+        border-radius: 8px;
+        border: .1px solid var(--darktext);
+        scrollbar-color: var(--darktext) transparent;
+        scrollbar-width: thin;
+        background: var(--main);
+    }
+
+    select::picker-icon {
+        content: "+";
+    }
+
+    option:hover {
+        background-color: var(--tabelfirstcolor);
+        
+    }
+
+    option:checked {
+        background-color: var(--tabelfirstcolor);
+    }
+
+    option:checked::checkmark {
+        content: "";
     }
 
     .ins-switch {
