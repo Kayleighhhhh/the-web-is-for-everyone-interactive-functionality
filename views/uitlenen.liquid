@@ -1,8 +1,8 @@
 {% render 'partials/head.liquid' %}
+</header>
 
 <main class="uit-pg">
     <header class="uit-head">
-        <a href="/instrumenten/{{ instrument.key }}" class="back">← Terug</a>
         <h1>Uitlenen</h1>
         <h2>{{ instrument.name }}</h2>
     </header>
@@ -11,8 +11,8 @@
         <img class="uit-img" src="https://fdnd-agency.directus.app/assets/{{ instrument.photo }}" alt="{{ instrument.name }}">
         {% comment %} <img src="assets/DSC_0473.jpg" alt="" class="uit-img"> {% endcomment %}
 
-        <label for="name" class="veld">Wie leent het?</label>
-        <input type="text" id="name" name="studentName" placeholder="Volledige naam" required>
+        <label for="name" class="veld">Wie leent het?
+        <input type="text" id="name" name="studentName" placeholder="Volledige naam" required></label>
         
         <input type="hidden" name="id" value="{{ instrument.id }}">
         <input type="hidden" name="key" value="{{ instrument.key }}">
