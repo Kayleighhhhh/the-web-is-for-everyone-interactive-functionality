@@ -213,28 +213,33 @@
   </nav>
 
   <table class="ins-list">
-    <thead class="ins-list-head">
-      <tr>
-        <th><h2 class="ins-title">Instrumenten</h2></th>
-        <th><h2 class="ins-title">Status</h2></th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for instrument in instrumenten %}
-        <tr class="ins-row">
-          <td>
-            <a href="/instrumenten/{{ instrument.key }}" class="ins-link">
-              <h3 class="ins-name">{{ instrument.name }}</h3>
-            </a>
-          </td>
+  <thead class="ins-list-head">
+    <tr>
+      <th class="ins-title">Instrumenten</th>
+      <th class="ins-title">Status</th>
+      <th class="ins-title">Actie</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for instrument in instrumenten %}
+      <tr class="ins-row">
+        <td class="ins-cell" data-label="Instrument">
+          <h3 class="ins-name">{{ instrument.name }}</h3>
+        </td>
 
-          <td class="ins-status">
-            <a href="/instrumenten/{{ instrument.key }}" class="ins-link"><p>{{ instrument.status | default:"Onbekend" }}</p></a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+        <td class="ins-cell" data-label="Status">
+          <p class="ins-status-text">{{ instrument.status | default:"Onbekend" }}</p>
+        </td>
+
+        <td class="ins-cell" data-label="Details">
+          <a href="/instrumenten/{{ instrument.key }}" class="ins-details-link">
+            Bekijk details
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 </section>
 
 {% render 'partials/foot.liquid' %}
