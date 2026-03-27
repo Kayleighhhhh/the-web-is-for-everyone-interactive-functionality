@@ -1,9 +1,17 @@
 {% render 'partials/head.liquid' %}
+
+<div class="breadcrumbs">
+<a href="/instrumenten">Instrumenten </a>
+{% comment %} <p>" / "</p> {% endcomment %}
+ {% comment %} voor beste resultaat met een before in css de / plaatsen {% endcomment %}
+<p>&nbsp; / {{ instrument.key }}</p>
+
+</div>
+
 </header>
 
 <main class="instrument-detail">
     <header>
-        <a href="/instrumenten">← Overzicht</a>
         <h1>{{ instrument.name }}</h1>
         <h2>{{ instrument.instrument }}</h2>
     </header>

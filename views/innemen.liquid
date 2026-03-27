@@ -1,4 +1,13 @@
 {% render 'partials/head.liquid' %}
+
+<div class="breadcrumbs">
+<a href="/instrumenten">Instrumenten </a>
+{% comment %} <p>" / "</p> {% endcomment %}
+ {% comment %} voor beste resultaat met een before in css de / plaatsen {% endcomment %}
+<a href="/instrumenten/{{ instrument.key }}">&nbsp; / {{ instrument.key }}</a>
+<p>&nbsp / Innemen</p>
+
+</div>
 </header>
 
 <main class="in-pg">
