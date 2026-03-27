@@ -24,9 +24,9 @@
 
     <section>
         <article>
-            {% if instrument.brand %}<p><strong>Merk:</strong> {{ instrument.brand }}</p>{% endif %}
+            {% comment %} {% if instrument.brand %}<p><strong>Merk:</strong> {{ instrument.brand }}</p>{% endif %}
             {% if instrument.serial_number %}<p><strong>Serie nummer:</strong> {{ instrument.serial_number }}</p>{% endif %}
-            {% if instrument.storage %}<p><strong>Berplaats:</strong> {{ instrument.storage }}</p>{% endif %}
+            {% if instrument.storage %}<p><strong>Berplaats:</strong> {{ instrument.storage }}</p>{% endif %} {% endcomment %}
             <p><strong>Merk:</strong> {{ instrument.brand }}</p>
             <p><strong>Serie nummer:</strong> {{ instrument.serial_number }}</p>
             <p><strong>Berplaats:</strong> Instrumentenhok tweede verdieping</p>
