@@ -3,14 +3,14 @@
     --secondair: #46166B;
     --tabelfirstcolor: #DCCBE8;
     --tabelsecondcolor: #EDE1F6;
-    --darktext:  #280940;
+    --darktext: #280940;
     --lighttext: #fff;
 }
 
 @font-face {
     font-family: feijoa;
     src: url("../assets/Feijoa-Medium.woff2");
-    
+
 }
 
 @font-face {
@@ -18,11 +18,11 @@
     src: url("../assets/Akkurat-Regular.woff2");
 }
 
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
+
 }
 
 html {
@@ -30,7 +30,7 @@ html {
 }
 
 body {
-    background: 
+    background:
         radial-gradient(circle at 20% 30%, #aa82ff40, transparent 50%),
         radial-gradient(circle at 80% 70%, #c8aaff40, transparent 60%),
         radial-gradient(circle at 50% 100%, #966eff33, transparent 45%);
@@ -40,15 +40,20 @@ body {
     height: 100%;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     color: var(--secondair);
     font-family: akkuratreg, sans-serif;
 }
 
 .logo {
     margin: 1em;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content 1fr;
     gap: .3em;
 
     @media (min-width: 340px) {
@@ -102,38 +107,47 @@ a {
     font-family: feijoa, sans-serif;
 }
 
-ul, li {
+ul,
+li {
     list-style-type: none;
 }
 
-select,::picker(select) {
-        appearance: base-select;
-        border:unset;
-        border-radius: 8px;
-        border: .1px solid var(--darktext);
-        scrollbar-color: var(--darktext) transparent;
-        scrollbar-width: thin;
-        background: var(--main);
-    }
+select,
+::picker(select) {
+    appearance: base-select;
+    border: unset;
+    border-radius: 8px;
+    border: .1px solid var(--darktext);
+    scrollbar-color: var(--darktext) transparent;
+    scrollbar-width: thin;
+    background: var(--main);
+}
 
-    select::picker-icon {
-        content: "+";
-        transition: .2s ease;
-    }
-    select[open]::picker-icon {
-        transform: rotate(45deg);
-    }
+select::picker-icon {
+    content: "+";
+    transition: .2s ease;
+}
 
-    option:hover {
-        background-color: var(--tabelfirstcolor);
-        
-    }
+select[open]::picker-icon {
+    transform: rotate(45deg);
+}
 
-    option:checked {
-        background-color: var(--tabelfirstcolor);
-    }
+option:hover {
+    background-color: var(--tabelfirstcolor);
 
-    option:checked::checkmark {
-        content: "";
-    }
+}
 
+option:checked {
+    background-color: var(--tabelfirstcolor);
+}
+
+option:checked::checkmark {
+    content: "";
+}
+
+.breadcrumbs {
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding: 0 .5em 0 .5em;
+}
