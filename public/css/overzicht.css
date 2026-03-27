@@ -167,7 +167,7 @@
 
         .ins-status-text {
             margin: 0;
-            font-family: feijoa, sans-serif;
+            /* font-family: feijoa, sans-serif; */
             color: var(--secondair);
         }
 

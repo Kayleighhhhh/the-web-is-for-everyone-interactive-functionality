@@ -7,11 +7,11 @@
     --lighttext: #fff;
 }
 
-@font-face {
+/* @font-face {
     font-family: feijoa;
     src: url("../assets/Feijoa-Medium.woff2");
 
-}
+} */
 
 @font-face {
     font-family: akkuratreg;
@@ -97,14 +97,14 @@ h5 {
 }
 
 p {
-    font-family: feijoa, sans-serif;
+    font-family: akkuratreg, sans-serif;
     color: var(--darktext);
 }
 
 a {
     text-decoration: none;
     color: var(--darktext);
-    font-family: feijoa, sans-serif;
+    font-family: akkuratreg, sans-serif;
 }
 
 ul,
@@ -125,10 +125,10 @@ select,
 
 select::picker-icon {
     content: "+";
-    transition: .2s ease;
+    transition: .2s rotate;
 }
 
-select[open]::picker-icon {
+select:open::picker-icon {
     transform: rotate(45deg);
 }
 
