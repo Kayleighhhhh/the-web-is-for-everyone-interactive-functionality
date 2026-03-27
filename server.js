@@ -132,7 +132,7 @@ app.post('/instrumenten/:key/uitlenen', async function (request, response) {
       'Content-Type': 'application/json;charset=UTF-8'
     },
     body: JSON.stringify({
-      status: "Onbeschikbaar"
+      status: "Uitgeleend"
     })
   })
 
