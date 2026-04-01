@@ -56,7 +56,7 @@ app.get('/instrumenten', async function (request, response) {
   }
   params.set('limit', 50)
 
-  console.log(params.toString())
+  // console.log(params.toString())
   //haal de link op om het filter achter te plakken
   const instrumentsResponse = await fetch('https://fdnd-agency.directus.app/items/preludefonds_instruments/?' + params.toString())
   //zet de data om naar json
