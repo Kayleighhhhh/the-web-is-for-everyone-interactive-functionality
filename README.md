@@ -6,7 +6,6 @@ Deze sprint heb ik gewerkt aan een interactieve webapplicatie voor het beheren, 
   * [Beschrijving](#beschrijving)
   * [Gebruik](#gebruik)
   * [Kenmerken](#kenmerken)
-  * [Installatie](#installatie)
   * [Bronnen](#bronnen)
   * [Licentie](#licentie)
 
@@ -50,11 +49,12 @@ Relatieve Eenheden: Om goede toegankelijkheid en responsiviteit te houden, worde
 
 CSS Grid & Flexbox: Grid en flexbox zijn gebruikt voor formulieren en uitlijning van actieknoppen.
 
-## Installatie
-<!-- Bij Installatie staat hoe een andere developer aan jouw repo kan werken -->
-
 
 ## Bronnen
+
+Fonts: Akkurat Regular voor een strakke, leesbare uitstraling.
+
+Technieken: MDN voor HTML5 Semantic Elements en CSS Nesting specificaties.
 
 ## Licentie
 
