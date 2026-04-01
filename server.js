@@ -54,7 +54,7 @@ app.get('/instrumenten', async function (request, response) {
   if (soort) {
     params.set('filter[instrument][_eq]', soort)
   }
-  params.set('limit', 20)
+  params.set('limit', 25)
 
   // console.log(params.toString())
   //haal de link op om het filter achter te plakken
