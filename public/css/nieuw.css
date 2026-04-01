@@ -121,6 +121,7 @@
                 text-align: center;
                 transition: opacity 0.2s;
                 background-color: var(--main);
+                color: var(--darktext);
 
                 &--main {
                     background-color: var(--secondair);

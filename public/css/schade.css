@@ -45,11 +45,16 @@
                 padding: 0.75rem 1rem;
                 font-family: inherit;
                 outline: none;
+                color: var(--darktext);
             }
 
             textarea {
                 min-height: 8rem;
                 resize: vertical;
+
+                &::placeholder {
+                    color: var(--darktext);
+                }
             }
         }
 
@@ -77,6 +82,7 @@
                 overflow: hidden;
                 border: 0.125rem dashed transparent;
                 transition: border-color 0.2s ease;
+                color: var(--darktext);
 
                 &:hover {
                     border-color: var(--main);
@@ -122,6 +128,7 @@
         font-family: inherit;
         transition: transform 0.1s;
         background-color: var(--main);
+        color: var(--darktext);
 
         &:active { transform: scale(0.98); }
 
