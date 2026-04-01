@@ -203,6 +203,21 @@ app.get('/instrumenten/:key/schade', async function (request, response) {
   })
 })
 
+app.post('/instrumenten/:key/schade', async function (request, response) {
+
+  const patchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_instruments/" + request.body.id, {
+    method: "PATCH",
+    headers: { 
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify({
+      status: "In Reparatie"
+    })
+ })
+ console.log('schade gelukt voor ID:', request.body.id)
+ response.redirect(303, "/instrumenten/" + request.params.key + "/schade")
+})
+
 
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
