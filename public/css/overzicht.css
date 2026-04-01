@@ -11,7 +11,7 @@
         margin-bottom: 2rem;
         align-items: flex-start;
 
-        @media (min-width: 48rem) {
+        @media (min-width: 28rem) {
             flex-direction: row;
             align-items: center;
         }
