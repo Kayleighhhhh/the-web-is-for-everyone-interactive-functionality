@@ -199,12 +199,14 @@ app.get('/instrumenten/:key/schade', async function (request, response) {
 
   //render schade.liquid en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('schade.liquid', {
-    instrument: instrumentResponseJSON.data[0]
+    instrument: instrumentResponseJSON.data[0],
+    melding: request.query.melding
   })
 })
 
 app.post('/instrumenten/:key/schade', async function (request, response) {
 
+try {
   const patchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_instruments/" + request.body.id, {
     method: "PATCH",
     headers: { 
@@ -214,8 +216,18 @@ app.post('/instrumenten/:key/schade', async function (request, response) {
       status: "In Reparatie"
     })
  })
- console.log('schade gelukt voor ID:', request.body.id)
- response.redirect(303, "/instrumenten/" + request.params.key + "/schade")
+ if (patchResponse.ok) {
+      // API zegt: Gelukt! We sturen success=true mee
+      response.redirect(303, "/instrumenten/" + request.params.key + "/schade?melding=success#status")
+    } else {
+      // API zegt: Fout! (bijv. server error of verkeerd ID). We sturen error=true mee
+      response.redirect(303, "/instrumenten/" + request.params.key + "/schade?melding=error#status")
+    }
+
+  } catch (error) {
+    // De fetch zelf is gecrasht (bijv. geen internet). Ook een error dus.
+    response.redirect(303, "/instrumenten/" + request.params.key + "/schade?melding=error#status")
+  }
 })
 
 

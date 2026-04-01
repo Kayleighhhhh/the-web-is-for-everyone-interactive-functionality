@@ -48,7 +48,12 @@
         <input type="hidden" name="key" value="{{ instrument.key }}">
         <input type="hidden" name="status" value="status">
         <p>Huidige status: <strong>{{ instrument.status }}</strong></p>
-        <button type="submit" class="schade-btn schade-btn--repair">Zet op 'In Reparatie'</button>
+        <button type="submit" id="status" class="schade-btn schade-btn--repair">
+            {% if melding == 'success' %}✅ De status is aangepast!
+            {% elsif melding == 'error' %}❌ Er ging iets mis!
+            {% else %}Zet op 'In Reparatie'
+            {% endif %}
+        </button>
     </form>
 
 
