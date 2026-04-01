@@ -38,7 +38,7 @@ Schademeldingen: Een apart systeem voor historie en nieuwe meldingen.
 In dit project heb ik keuzes gemaakt om de kwaliteit en schaalbaarheid goed te houden tijdens het maken van een nette layout:
 
 ### HTML & Liquid
-Semantische Structuur: Er is gebruikgemaakt van HTML5 elementen zoals <section>, <article>, <fieldset> en <figure>. Divjes zijn alleen gebruikt als het echt nodig was.
+Semantische Structuur: Er is gebruikgemaakt van HTML5 elementen zoals section, article, nav en form. Divjes zijn alleen gebruikt als het echt nodig was.
 
 ### CSS
 Mobile First: De styling begint bij de kleinste schermen. Media queries met een (min-width) worden gebruikt om de layout uit te breiden naar desktop.
