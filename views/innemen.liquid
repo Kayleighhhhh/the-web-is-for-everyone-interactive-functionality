@@ -33,7 +33,12 @@
         <input type="hidden" name="id" value="{{ instrument.id }}">
         <input type="hidden" name="key" value="{{ instrument.key }}">
         
-        <button type="submit" class="btn-in">Inname voltooien</button>
+        <button type="submit" class="btn-in">
+            {% if melding == 'success' %}✅ De status is aangepast!
+            {% elsif melding == 'error' %}❌ Er ging iets mis!
+            {% else %}Inname voltooien
+            {% endif %}
+        </button>
     </form>
 </main>
 

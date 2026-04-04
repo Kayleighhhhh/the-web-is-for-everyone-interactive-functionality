@@ -26,7 +26,12 @@
         <input type="hidden" name="id" value="{{ instrument.id }}">
         <input type="hidden" name="key" value="{{ instrument.key }}">
 
-        <button type="submit" class="btn-uit">Bevestig uitlening</button>
+        <button type="submit" class="btn-uit">
+            {% if melding == 'success' %}✅ De status is aangepast!
+            {% elsif melding == 'error' %}❌ Er ging iets mis!
+            {% else %}Bevestig uitlening
+            {% endif %}
+        </button>
     </form>
 </main>
 

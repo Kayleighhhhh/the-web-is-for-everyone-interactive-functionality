@@ -111,11 +111,14 @@ app.get('/instrumenten/:key/uitlenen', async function (request, response) {
 
   //render uitlenen.liquid  en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('uitlenen.liquid', {
-    instrument: instrumentResponseJSON.data[0]
+    instrument: instrumentResponseJSON.data[0],
+    melding: request.query.melding
   })
 })
 
 app.post('/instrumenten/:key/uitlenen', async function (request, response) {
+
+try {
   const fetchResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_log", {
     method: "POST",
     body: JSON.stringify({
@@ -143,7 +146,18 @@ app.post('/instrumenten/:key/uitlenen', async function (request, response) {
   const patchResponseJSON = await patchResponse.json()
   console.log(patchResponseJSON)
 
-  response.redirect(303, "/instrumenten/" + request.params.key)
+ if (patchResponse.ok) {
+      // API zegt: Gelukt! We sturen success=true mee
+      response.redirect(303, "/instrumenten/" + request.params.key + "/uitlenen?melding=success#status")
+    } else {
+      // API zegt: Fout! (bijv. server error of verkeerd ID). We sturen error=true mee
+      response.redirect(303, "/instrumenten/" + request.params.key + "/uitlenen?melding=error#status")
+    }
+
+  } catch (error) {
+    // De fetch zelf is gecrasht (bijv. geen internet). Ook een error dus.
+    response.redirect(303, "/instrumenten/" + request.params.key + "/uitlenen?melding=error#status")
+  }
 })
 
 
@@ -156,12 +170,14 @@ app.get('/instrumenten/:key/innemen', async function (request, response) {
 
   //render innemen.liquid en geef [0] mee aan de extra info zodat hij alleen de eerste uit de array pakt
   response.render('innemen.liquid', {
-    instrument: instrumentResponseJSON.data[0]
+    instrument: instrumentResponseJSON.data[0],
+    melding: request.query.melding
   })
 })
 
 app.post('/instrumenten/:key/innemen', async function (request, response) {
 
+try {
   const logResponse = await fetch("https://fdnd-agency.directus.app/items/preludefonds_log", {
     method: "POST",
     headers: { 
@@ -183,11 +199,22 @@ app.post('/instrumenten/:key/innemen', async function (request, response) {
     })
   })
 
+
   // log de resultaten in je terminal voor controle
   console.log('Inname gelukt voor ID:', request.body.id)
 
-  // Ga terug naar de detailpagina
-  response.redirect(303, "/instrumenten/" + request.params.key)
+ if (patchResponse.ok) {
+      // API zegt: Gelukt! We sturen success=true mee
+      response.redirect(303, "/instrumenten/" + request.params.key + "/innemen?melding=success#status")
+    } else {
+      // API zegt: Fout! (bijv. server error of verkeerd ID). We sturen error=true mee
+      response.redirect(303, "/instrumenten/" + request.params.key + "/innemen?melding=error#status")
+    }
+
+  } catch (error) {
+    // De fetch zelf is gecrasht (bijv. geen internet). Ook een error dus.
+    response.redirect(303, "/instrumenten/" + request.params.key + "/innemen?melding=error#status")
+  }
 })
 
 //maak een route aan voor de schade pagina
